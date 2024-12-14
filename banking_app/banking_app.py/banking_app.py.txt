@@ -1,0 +1,45 @@
+from account import Account
+from transactions import create_account, deposit, withdraw, check_balance
+
+def main():
+    accounts = {}
+    while True:
+        print("\nWelcome to the Banking App")
+        print("1. Create an Account")
+        print("2. Deposit Money")
+        print("3. Withdraw Money")
+        print("4. Check Balance")
+        print("5. Exit")
+        choice = input("Please enter your choice: ")
+        
+        if choice == '1':
+            account = create_account()
+            accounts[account.account_number] = account
+        elif choice == '2':
+            account_number = input("Enter account number: ")
+            if account_number in accounts:
+                amount = float(input("Enter amount to deposit: "))
+                deposit(accounts[account_number], amount)
+            else:
+                print("Account not found.")
+        elif choice == '3':
+            account_number = input("Enter account number: ")
+            if account_number in accounts:
+                amount = float(input("Enter amount to withdraw: "))
+                withdraw(accounts[account_number], amount)
+            else:
+                print("Account not found.")
+        elif choice == '4':
+            account_number = input("Enter account number: ")
+            if account_number in accounts:
+                check_balance(accounts[account_number])
+            else:
+                print("Account not found.")
+        elif choice == '5':
+            print("Thank you for using the Banking App. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
